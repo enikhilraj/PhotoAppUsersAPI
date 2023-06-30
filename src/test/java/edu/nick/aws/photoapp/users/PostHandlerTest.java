@@ -31,11 +31,11 @@ public class PostHandlerTest {
 
   @Test
   public void successfulResponse() {
-    String userid =  UUID.randomUUID().toString();
+    //String userid =  UUID.randomUUID().toString();
     JsonObject userDetails = new JsonObject();
     userDetails.addProperty("firstName", "Nikhil");
     userDetails.addProperty("lastName", "Gargatte");
-    userDetails.addProperty("userid", userid);
+    userDetails.addProperty("userid", postHandler.userid);
     String userDetailsJsonString = new Gson().toJson(userDetails, JsonObject.class);
     when(input.getBody()).thenReturn(userDetailsJsonString);
 
@@ -50,6 +50,6 @@ public class PostHandlerTest {
     JsonObject contentJson = new JsonParser().parse(content).getAsJsonObject();
     assertTrue(contentJson.get("firstName").getAsString().equals("Nikhil"));
     assertTrue(contentJson.get("lastName").getAsString().equals("Gargatte"));
-    assertTrue(contentJson.get("userid").getAsString().equals(userid));
+    assertTrue(contentJson.get("userid").getAsString().equals(postHandler.userid));
   }
 }

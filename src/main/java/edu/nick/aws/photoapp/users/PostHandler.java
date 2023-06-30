@@ -14,7 +14,10 @@ import java.util.UUID;
  * Handler for requests to Lambda function.
  */
 public class PostHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+    String userid = UUID.randomUUID().toString();
+
     public APIGatewayProxyResponseEvent handleRequest(final APIGatewayProxyRequestEvent input, final Context context) {
+
         String requestBody = input.getBody();
 
         Map<String, String> requestHeaders = input.getHeaders();
@@ -23,7 +26,7 @@ public class PostHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
 
         Gson gson = new Gson();
         Map<String, String> userDetails = gson.fromJson(requestBody, Map.class);
-        //userDetails.put(USERID, UUID.randomUUID().toString());
+        userDetails.put(USERID, userid);
 
         //TODO: Process user details
 
